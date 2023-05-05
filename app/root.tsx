@@ -29,7 +29,7 @@ export const meta: V2_MetaFunction = () => {
 
 function Document({ children, title }: PropsWithChildren<{ title?: string }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -56,40 +56,22 @@ function Document({ children, title }: PropsWithChildren<{ title?: string }>) {
 }
 
 export default function App() {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
 
-  useEffect(() => {
-    const prefersDarkMode =
-      window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches;
-
-    if (prefersDarkMode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-
-    setDarkMode(prefersDarkMode);
-  }, []);
+  console.log(darkMode);
 
   const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
+    const newValue = !darkMode;
+    setDarkMode(newValue);
     document.documentElement.classList.toggle("dark");
+    localStorage.setItem("darkMode", JSON.stringify(newValue));
   };
 
-  const handleSystemPreference = () => {
-    const prefersDarkMode =
-      window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches;
-
-    if (prefersDarkMode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-
-    setDarkMode(prefersDarkMode);
-  };
+  useEffect(() => {
+    const darkMode = JSON.parse(localStorage.getItem("darkMode") || "false");
+    setDarkMode(darkMode);
+    document.documentElement.classList.toggle("dark", darkMode);
+  }, [darkMode]);
 
   return (
     <Document>
@@ -102,7 +84,6 @@ export default function App() {
             <button onClick={toggleDarkMode}>
               {darkMode ? "Light" : "Dark"} Mode
             </button>
-            <button onClick={handleSystemPreference}>System Preference</button>
           </div>
         </nav>
       </header>
