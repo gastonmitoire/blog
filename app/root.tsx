@@ -1,4 +1,4 @@
-import type { LinksFunction, V2_MetaFunction } from "@remix-run/node";
+import type { V2_MetaFunction } from "@remix-run/node";
 import {
   isRouteErrorResponse,
   Links,
@@ -9,24 +9,6 @@ import {
   useRouteError,
 } from "@remix-run/react";
 import type { PropsWithChildren } from "react";
-
-import globalLargeStylesUrl from "~/styles/global-large.css";
-import globalMediumStylesUrl from "~/styles/global-medium.css";
-import globalStylesUrl from "~/styles/global.css";
-
-export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: globalStylesUrl },
-  {
-    rel: "stylesheet",
-    href: globalMediumStylesUrl,
-    media: "print, (min-width: 640px)",
-  },
-  {
-    rel: "stylesheet",
-    href: globalLargeStylesUrl,
-    media: "screen and (min-width: 1024px)",
-  },
-];
 
 export const meta: V2_MetaFunction = () => {
   const description = "Learn Remix and laugh at the same time!";
