@@ -2,7 +2,7 @@ import { Link } from "@remix-run/react";
 
 export default function IndexRoute() {
   return (
-    <div className="container">
+    <div className="min-h-screen">
       <div className="content">
         <h1>
           Remix <span>Jokes!</span>

@@ -1,4 +1,4 @@
-import type { V2_MetaFunction } from "@remix-run/node";
+import type { LinksFunction, V2_MetaFunction } from "@remix-run/node";
 import {
   isRouteErrorResponse,
   Links,
@@ -9,6 +9,12 @@ import {
   useRouteError,
 } from "@remix-run/react";
 import type { PropsWithChildren } from "react";
+
+import stylesheet from "~/tailwind.css";
+
+export const links: LinksFunction = () => [
+  { rel: "stylesheet", href: stylesheet },
+];
 
 export const meta: V2_MetaFunction = () => {
   const description = "Learn Remix and laugh at the same time!";
