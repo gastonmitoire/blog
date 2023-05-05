@@ -59,15 +59,36 @@ export default function App() {
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
-    if (darkMode) {
+    const prefersDarkMode =
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+    if (prefersDarkMode) {
       document.documentElement.classList.add("dark");
     } else {
       document.documentElement.classList.remove("dark");
     }
-  }, [darkMode]);
+
+    setDarkMode(prefersDarkMode);
+  }, []);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
+    document.documentElement.classList.toggle("dark");
+  };
+
+  const handleSystemPreference = () => {
+    const prefersDarkMode =
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+    if (prefersDarkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+
+    setDarkMode(prefersDarkMode);
   };
 
   return (
@@ -78,7 +99,10 @@ export default function App() {
             My Website
           </h1>
           <div className="flex items-center space-x-4">
-            <button onClick={toggleDarkMode}>toggle theme</button>
+            <button onClick={toggleDarkMode}>
+              {darkMode ? "Light" : "Dark"} Mode
+            </button>
+            <button onClick={handleSystemPreference}>System Preference</button>
           </div>
         </nav>
       </header>
