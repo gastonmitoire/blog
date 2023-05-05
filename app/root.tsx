@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import type { LinksFunction, V2_MetaFunction } from "@remix-run/node";
 import {
   isRouteErrorResponse,
@@ -45,7 +46,7 @@ function Document({ children, title }: PropsWithChildren<{ title?: string }>) {
         {title ? <title>{title}</title> : null}
         <Links />
       </head>
-      <body>
+      <body className="dark:bg-slate-800">
         {children}
         <Scripts />
         <LiveReload />
@@ -55,8 +56,32 @@ function Document({ children, title }: PropsWithChildren<{ title?: string }>) {
 }
 
 export default function App() {
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [darkMode]);
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
+
   return (
     <Document>
+      <header className="bg-white dark:bg-gray-800">
+        <nav className="container mx-auto flex items-center justify-between">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+            My Website
+          </h1>
+          <div className="flex items-center space-x-4">
+            <button onClick={toggleDarkMode}>toggle theme</button>
+          </div>
+        </nav>
+      </header>
       <Outlet />
     </Document>
   );
