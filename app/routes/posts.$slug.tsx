@@ -79,8 +79,6 @@ export const action = async ({ params, request }: ActionArgs) => {
 export default function PostRoute() {
   const data = useLoaderData<typeof loader>();
 
-  console.log(data);
-
   return <PostDisplay isOwner={data.isOwner} post={data.post} />;
 }
 

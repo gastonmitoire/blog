@@ -44,9 +44,7 @@ export const action = async ({ request }: ActionArgs) => {
   const loginType = form.get("loginType");
   const password = form.get("password");
   const username = form.get("username");
-  const redirectTo = validateUrl(
-    (form.get("redirectTo") as string) || "/jokes"
-  );
+  const redirectTo = validateUrl((form.get("redirectTo") as string) || "/");
   if (
     typeof loginType !== "string" ||
     typeof password !== "string" ||
@@ -120,10 +118,13 @@ export default function Login() {
   const actionData = useActionData<typeof action>();
   const [searchParams] = useSearchParams();
   return (
-    <div className="container">
-      <div className="content" data-light="">
-        <h1>Login</h1>
-        <Form method="post">
+    <div className="bg-red-300">
+      <div className="container mx-auto">
+        <h1 className="text-3xl">Login</h1>
+        <Form
+          method="post"
+          className="flex flex-col justify-center items-center gap-5"
+        >
           <input
             type="hidden"
             name="redirectTo"

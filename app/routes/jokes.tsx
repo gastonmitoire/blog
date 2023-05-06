@@ -12,6 +12,7 @@ export const loader = async ({ request }: LoaderArgs) => {
     take: 5,
   });
   const user = await getUser(request);
+  console.log("user", user);
 
   return json({ jokeListItems, user });
 };
