@@ -144,7 +144,7 @@ export default function Login() {
                 actionData?.fields?.loginType === "login"
               }
             />
-            ingresar
+            Login
           </label>
           <label
             htmlFor="register-input"
@@ -157,7 +157,7 @@ export default function Login() {
               value="register"
               defaultChecked={actionData?.fields?.loginType === "register"}
             />
-            registrarse
+            Register
           </label>
         </fieldset>
         <div className="flex flex-col">
@@ -165,7 +165,7 @@ export default function Login() {
             htmlFor="username-input"
             className="px-1.5 py-1 uppercase font-thin tracking-wide text-sm dark:bg-neutral-800"
           >
-            usuario
+            User
           </label>
           {actionData?.fieldErrors?.username ? (
             <p
@@ -230,16 +230,16 @@ export default function Login() {
           type="submit"
           className="place-self-end py-1.5 px-3 rounded-lg w-min uppercase text-neutral-800 dark:text-neutral-100 bg-gray-300 dark:bg-neutral-800"
         >
-          enviar
+          Submit
         </button>
       </Form>
       <div>
         <ul className="flex justify-center gap-3 text-neutral-700 dark:text-neutral-300">
           <li>
-            <Link to="/">Inicio</Link>
+            <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/posts">Publicaciones</Link>
+            <Link to="/posts">Posts</Link>
           </li>
         </ul>
       </div>

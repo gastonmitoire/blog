@@ -8,7 +8,7 @@ import { json } from "@remix-run/node";
 import { useLoaderData } from "react-router";
 import {
   isRouteErrorResponse,
-  Links,
+  Link,
   LiveReload,
   Meta,
   Outlet,
@@ -81,10 +81,18 @@ export function ErrorBoundary() {
   if (isRouteErrorResponse(error)) {
     return (
       <Document title={`${error.status} ${error.statusText}`}>
-        <div className="error-container">
-          <h1>
-            {error.status} {error.statusText}
-          </h1>
+        <div className="grid place-items-center h-screen">
+          <span className="grid place-items-center">
+            <h1 className="text-3xl font-bold uppercase text-red-700">
+              {error.status} {error.statusText}
+            </h1>
+            <Link
+              to="/"
+              className="flex justify-center gap-3 text-neutral-700 dark:text-neutral-300"
+            >
+              Home
+            </Link>
+          </span>
         </div>
       </Document>
     );
@@ -93,7 +101,7 @@ export function ErrorBoundary() {
   const errorMessage = error instanceof Error ? error.message : "Unknown error";
   return (
     <Document title="Uh-oh!">
-      <div className="error-container">
+      <div className="bg-red-500">
         <h1>App Error</h1>
         <pre>{errorMessage}</pre>
       </div>
