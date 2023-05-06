@@ -21,13 +21,13 @@ export const meta: V2_MetaFunction = () => {
 
 function validateUsername(username: string) {
   if (username.length < 3) {
-    return "Usernames must be at least 3 characters long";
+    return "El nombre de usuario debe tener al menos 3 caracteres";
   }
 }
 
 function validatePassword(password: string) {
   if (password.length < 6) {
-    return "Passwords must be at least 6 characters long";
+    return "La contraseña debe tener al menos 6 caracteres";
   }
 }
 
@@ -118,105 +118,128 @@ export default function Login() {
   const actionData = useActionData<typeof action>();
   const [searchParams] = useSearchParams();
   return (
-    <div className="bg-red-300">
-      <div className="container mx-auto">
-        <h1 className="text-3xl">Login</h1>
-        <Form
-          method="post"
-          className="flex flex-col justify-center items-center gap-5"
-        >
+    <div className="container mx-auto flex flex-col justify-center items-center gap-5">
+      <Form
+        method="post"
+        className="grid gap-3 w-1/4 dark:bg-neutral-700 dark:text-white p-5 rounded-md shadow-md"
+      >
+        <input
+          type="hidden"
+          name="redirectTo"
+          value={searchParams.get("redirectTo") ?? undefined}
+        />
+        <fieldset className="flex justify-evenly">
+          <legend className="sr-only">Login or Register?</legend>
+          <label
+            htmlFor="login-input"
+            className="flex items-center gap-1 lowercase cursor-pointer"
+          >
+            <input
+              id="login-input"
+              type="radio"
+              name="loginType"
+              value="login"
+              defaultChecked={
+                !actionData?.fields?.loginType ||
+                actionData?.fields?.loginType === "login"
+              }
+            />
+            ingresar
+          </label>
+          <label
+            htmlFor="register-input"
+            className="flex items-center gap-1 lowercase cursor-pointer"
+          >
+            <input
+              id="register-input"
+              type="radio"
+              name="loginType"
+              value="register"
+              defaultChecked={actionData?.fields?.loginType === "register"}
+            />
+            registrarse
+          </label>
+        </fieldset>
+        <div className="flex flex-col">
+          <label
+            htmlFor="username-input"
+            className="px-1.5 py-1 uppercase font-thin tracking-wide text-sm dark:bg-neutral-800"
+          >
+            usuario
+          </label>
+          {actionData?.fieldErrors?.username ? (
+            <p
+              className="bg-red-800 p-1 font-bold uppercase trailing-wide text-sm"
+              role="alert"
+              id="username-error"
+            >
+              {actionData.fieldErrors.username}
+            </p>
+          ) : null}
           <input
-            type="hidden"
-            name="redirectTo"
-            value={searchParams.get("redirectTo") ?? undefined}
+            type="text"
+            id="username-input"
+            name="username"
+            defaultValue={actionData?.fields?.username}
+            aria-invalid={Boolean(actionData?.fieldErrors?.username)}
+            aria-errormessage={
+              actionData?.fieldErrors?.username ? "username-error" : undefined
+            }
+            className="px-2 py-1.5 rounded-b-md shadow-sm border border-gray-300 dark:bg-gray-800 dark:text-white"
           />
-          <fieldset>
-            <legend className="sr-only">Login or Register?</legend>
-            <label>
-              <input
-                type="radio"
-                name="loginType"
-                value="login"
-                defaultChecked={
-                  !actionData?.fields?.loginType ||
-                  actionData?.fields?.loginType === "login"
-                }
-              />{" "}
-              Login
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="loginType"
-                value="register"
-                defaultChecked={actionData?.fields?.loginType === "register"}
-              />{" "}
-              Register
-            </label>
-          </fieldset>
-          <div>
-            <label htmlFor="username-input">Username</label>
-            <input
-              type="text"
-              id="username-input"
-              name="username"
-              defaultValue={actionData?.fields?.username}
-              aria-invalid={Boolean(actionData?.fieldErrors?.username)}
-              aria-errormessage={
-                actionData?.fieldErrors?.username ? "username-error" : undefined
-              }
-            />
-            {actionData?.fieldErrors?.username ? (
-              <p
-                className="form-validation-error"
-                role="alert"
-                id="username-error"
-              >
-                {actionData.fieldErrors.username}
-              </p>
-            ) : null}
-          </div>
-          <div>
-            <label htmlFor="password-input">Password</label>
-            <input
-              id="password-input"
-              name="password"
-              type="password"
-              defaultValue={actionData?.fields?.password}
-              aria-invalid={Boolean(actionData?.fieldErrors?.password)}
-              aria-errormessage={
-                actionData?.fieldErrors?.password ? "password-error" : undefined
-              }
-            />
-            {actionData?.fieldErrors?.password ? (
-              <p
-                className="form-validation-error"
-                role="alert"
-                id="password-error"
-              >
-                {actionData.fieldErrors.password}
-              </p>
-            ) : null}
-          </div>
-          <div id="form-error-message">
-            {actionData?.formError ? (
-              <p className="form-validation-error" role="alert">
-                {actionData.formError}
-              </p>
-            ) : null}
-          </div>
-          <button type="submit" className="button">
-            Submit
-          </button>
-        </Form>
-      </div>
-      <div className="links">
-        <ul>
+        </div>
+        <div className="flex flex-col">
+          <label
+            htmlFor="password-input"
+            className="px-1.5 py-1 uppercase font-thin tracking-wide text-sm dark:bg-neutral-800"
+          >
+            Password
+          </label>
+          {actionData?.fieldErrors?.password ? (
+            <p
+              className="bg-red-800 p-1 font-bold uppercase trailing-wide text-sm"
+              role="alert"
+              id="password-error"
+            >
+              {actionData.fieldErrors.password}
+            </p>
+          ) : null}
+          <input
+            id="password-input"
+            name="password"
+            type="password"
+            defaultValue={actionData?.fields?.password}
+            aria-invalid={Boolean(actionData?.fieldErrors?.password)}
+            aria-errormessage={
+              actionData?.fieldErrors?.password ? "password-error" : undefined
+            }
+            className="px-2 py-1.5 rounded-b-md shadow-sm border border-gray-300 dark:bg-gray-800 dark:text-white"
+          />
+        </div>
+        <div id="form-error-message">
+          {actionData?.formError ? (
+            <p
+              className="bg-red-800 p-1 font-bold uppercase trailing-wide text-sm"
+              role="alert"
+            >
+              {actionData.formError}
+            </p>
+          ) : null}
+        </div>
+        <button
+          type="submit"
+          className="place-self-end py-1.5 px-3 rounded-lg w-min uppercase text-neutral-800 dark:text-neutral-100 bg-gray-300 dark:bg-neutral-800"
+        >
+          enviar
+        </button>
+      </Form>
+      <div>
+        <ul className="flex justify-center gap-3 text-neutral-700 dark:text-neutral-300">
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/">Inicio</Link>
           </li>
           <li>
-            <Link to="/jokes">Jokes</Link>
+            <Link to="/posts">Publicaciones</Link>
           </li>
         </ul>
       </div>
