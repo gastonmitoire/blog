@@ -10,15 +10,62 @@ async function seed() {
         "$2b$10$K7L1OJ45/4Y2nIvhRVpCe.FSmhDdWoXehVzJptJ/op0lSsvqNu/1u",
     },
   });
+  // SEED JOKES
   await Promise.all(
     getJokes().map((joke) => {
       const data = { jokesterId: kody.id, ...joke };
       return db.joke.create({ data });
     })
   );
+  // SEED POSTS
+  await Promise.all(
+    getPosts().map((post) => {
+      const data = { authorId: kody.id, ...post };
+      return db.post.create({ data });
+    })
+  );
 }
 
 seed();
+
+function getPosts() {
+  return [
+    {
+      slug: "my-first-post",
+      title: "My First Post",
+      markdown: `
+  # This is my first post
+  
+  Isn't it great?
+      `.trim(),
+    },
+    {
+      slug: "90s-mixtape",
+      title: "A Mixtape I Made Just For You",
+      markdown: `
+  # 90s Mixtape
+  
+  - I wish (Skee-Lo)
+  - This Is How We Do It (Montell Jordan)
+  - Everlong (Foo Fighters)
+  - Ms. Jackson (Outkast)
+  - Interstate Love Song (Stone Temple Pilots)
+  - Killing Me Softly With His Song (Fugees, Ms. Lauryn Hill)
+  - Just a Friend (Biz Markie)
+  - The Man Who Sold The World (Nirvana)
+  - Semi-Charmed Life (Third Eye Blind)
+  - ...Baby One More Time (Britney Spears)
+  - Better Man (Pearl Jam)
+  - It's All Coming Back to Me Now (Céline Dion)
+  - This Kiss (Faith Hill)
+  - Fly Away (Lenny Kravits)
+  - Scar Tissue (Red Hot Chili Peppers)
+  - Santa Monica (Everclear)
+  - C'mon N' Ride it (Quad City DJ's)
+      `.trim(),
+    },
+  ];
+}
 
 function getJokes() {
   // shout-out to https://icanhazdadjoke.com/
