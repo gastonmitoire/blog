@@ -16,7 +16,11 @@ export function Header({ darkMode, toggleDarkMode, user }: HeaderProps) {
         </h1>
         <div className="flex items-center space-x-4">
           <UserMenu user={user} />
-          <button onClick={toggleDarkMode}>
+          <button
+            title="Cambiar tema (dark/light)"
+            name="Toggle-Theme"
+            onClick={toggleDarkMode}
+          >
             {darkMode ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
