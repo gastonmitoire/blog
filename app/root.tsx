@@ -69,7 +69,22 @@ export default function App() {
         toggleDarkMode={toggleDarkMode}
         user={data.user}
       />
-      <Outlet />
+      <main className="container mx-auto flex">
+        {/* main content */}
+        <div className="flex-1 bg-blue-500">
+          <Outlet />
+        </div>
+        {/* sidebar */}
+        <div className="flex-0 bg-blue-300">
+          <ul>
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>Item 3</li>
+            <li>Item 4</li>
+            <li>Item 5</li>
+          </ul>
+        </div>
+      </main>
     </Document>
   );
 }

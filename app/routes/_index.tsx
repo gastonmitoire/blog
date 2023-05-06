@@ -2,6 +2,7 @@ import { LoaderArgs } from "@remix-run/server-runtime";
 import { Link, Outlet, useLoaderData } from "@remix-run/react";
 
 import { db } from "~/utils/db.server";
+import { PostDisplay } from "~/components/post";
 
 export const loader = async ({ request }: LoaderArgs) => {
   const postListItems = await db.post.findMany({
