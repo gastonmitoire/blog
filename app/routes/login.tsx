@@ -119,10 +119,18 @@ export default function Login() {
   const actionData = useActionData<typeof action>();
   const [searchParams] = useSearchParams();
   return (
-    <div className="container mx-auto flex flex-col justify-center items-center gap-5">
+    <div className="container mx-auto flex flex-col justify-center items-center gap-5 mt-52">
+      <ul className="flex justify-center gap-3 font-bold uppercase text-neutral-700 dark:text-neutral-300">
+        <li className="hover:text-blue-500">
+          <Link to="/">Home</Link>
+        </li>
+        <li className="hover:text-blue-500">
+          <Link to="/posts">Posts</Link>
+        </li>
+      </ul>
       <Form
         method="post"
-        className="grid gap-3 w-1/4 bg-neutral-100 dark:bg-neutral-700 dark:text-white p-5 rounded-md shadow-md"
+        className="grid gap-3 w-1/4 bg-neutral-200 bg-opacity-90 dark:bg-neutral-800 dark:bg-opacity-90 dark:text-white p-5 rounded-md shadow-md"
       >
         <input
           type="hidden"
@@ -229,16 +237,6 @@ export default function Login() {
         </div>
         <Button>Submit</Button>
       </Form>
-      <div>
-        <ul className="flex justify-center gap-3 text-neutral-700 dark:text-neutral-300">
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/posts">Posts</Link>
-          </li>
-        </ul>
-      </div>
     </div>
   );
 }

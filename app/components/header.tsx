@@ -1,4 +1,5 @@
 import { UserMenu } from "./user_menu";
+import { useLocation } from "react-router";
 
 // Header.tsx
 type HeaderProps = {
@@ -8,9 +9,10 @@ type HeaderProps = {
 };
 
 export function Header({ darkMode, toggleDarkMode, user }: HeaderProps) {
+  const { pathname } = useLocation();
   return (
     <header className="py-3">
-      <nav className="container flex items-center justify-between mx-auto p-3 bg-neutral-100 dark:bg-neutral-900">
+      <nav className="container flex items-center justify-between mx-auto p-3 bg-neutral-200 dark:bg-neutral-800">
         <h1 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100">
           MyBlog
         </h1>

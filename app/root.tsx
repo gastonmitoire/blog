@@ -5,7 +5,7 @@ import type {
   LoaderArgs,
 } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { useLoaderData } from "react-router";
+import { useLoaderData, useLocation } from "react-router";
 import {
   isRouteErrorResponse,
   Link,
@@ -44,13 +44,14 @@ export const loader = async ({ request }: LoaderArgs) => {
   return json({ user });
 };
 
-type Data = { user: User };
+type AppProps = PropsWithChildren<{
+  user: User | null;
+}>;
 
 export default function App() {
-  const data = useLoaderData() as unknown as Data;
+  const { pathname } = useLocation();
+  const { user } = useLoaderData() as AppProps;
   const [darkMode, setDarkMode] = useState(true);
-
-  console.log(data.user, "USER");
 
   const toggleDarkMode = () => {
     const newValue = !darkMode;
@@ -67,18 +68,14 @@ export default function App() {
 
   return (
     <Document>
-      <Header
-        darkMode={darkMode}
-        toggleDarkMode={toggleDarkMode}
-        user={data.user}
-      />
+      <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} user={user} />
       <main className="container mx-auto flex">
         {/* main content */}
-        <div className="flex-1 bg-blue-500">
+        <div className="flex-1">
           <Outlet />
         </div>
         {/* sidebar */}
-        <Sidebar />
+        {pathname !== "/login" ? <Sidebar /> : null}
       </main>
     </Document>
   );

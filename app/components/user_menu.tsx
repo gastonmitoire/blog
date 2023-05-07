@@ -1,5 +1,6 @@
 import type { User } from "@prisma/client";
-import { Form, Link, Outlet, useLoaderData } from "@remix-run/react";
+import { Form, Link } from "@remix-run/react";
+import { useLocation } from "@remix-run/react";
 
 import { Popover } from "./popover";
 
@@ -8,9 +9,12 @@ type Props = {
 };
 
 export function UserMenu(props: Props) {
+  const { pathname } = useLocation();
   const { user } = props;
 
-  console.log(user);
+  if (pathname === "/login") {
+    return null;
+  }
 
   if (!user) {
     return (
@@ -37,7 +41,7 @@ export function UserMenu(props: Props) {
     return (
       <span className="flex items-center gap-3">
         <strong className="text-lg text-neutral-700 dark:text-neutral-300">
-          {user.username}
+          {user?.username}
         </strong>
         <svg
           xmlns="http://www.w3.org/2000/svg"

@@ -17,7 +17,6 @@ export const loader = async ({ request }: LoaderArgs) => {
 export default function IndexRoute() {
   const data = useLoaderData<typeof loader>();
 
-  console.log(data);
   return (
     <div className="min-h-full">
       <aside>
