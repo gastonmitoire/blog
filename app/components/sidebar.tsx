@@ -4,7 +4,7 @@ import { SidebarList } from "./sidebar_list";
 
 export function Sidebar() {
   return (
-    <aside className="flex-0 flex flex-col overflow-y-auto gap-3 h-[85vh] min-w-[30%] p-3 bg-neutral-200 dark:bg-neutral-800">
+    <aside className="flex-0 flex flex-col overflow-y-auto gap-3 h-[85vh] min-w-[30%] p-3 bg-neutral-200 bg-opacity-90 dark:bg-neutral-800 dark:bg-opacity-90">
       <Button
         title="Create new post"
         icon={

@@ -7,7 +7,7 @@ type AccordionProps = {
 };
 
 export const Accordion = ({
-  defaultExpanded = false,
+  defaultExpanded = true,
   title,
   children,
 }: AccordionProps) => {
