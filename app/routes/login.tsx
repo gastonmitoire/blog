@@ -8,6 +8,7 @@ import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
 import { db } from "~/utils/db.server";
 import { badRequest } from "~/utils/request.server";
 import { createUserSession, login, register } from "~/utils/session.server";
+import { Button } from "~/components/button";
 
 export const meta: V2_MetaFunction = () => {
   const description = "Login to submit your own jokes to Remix Jokes!";
@@ -121,7 +122,7 @@ export default function Login() {
     <div className="container mx-auto flex flex-col justify-center items-center gap-5">
       <Form
         method="post"
-        className="grid gap-3 w-1/4 dark:bg-neutral-700 dark:text-white p-5 rounded-md shadow-md"
+        className="grid gap-3 w-1/4 bg-neutral-100 dark:bg-neutral-700 dark:text-white p-5 rounded-md shadow-md"
       >
         <input
           type="hidden"
@@ -226,12 +227,7 @@ export default function Login() {
             </p>
           ) : null}
         </div>
-        <button
-          type="submit"
-          className="place-self-end py-1.5 px-3 rounded-lg w-min uppercase text-neutral-800 dark:text-neutral-100 bg-gray-300 dark:bg-neutral-800"
-        >
-          Submit
-        </button>
+        <Button>Submit</Button>
       </Form>
       <div>
         <ul className="flex justify-center gap-3 text-neutral-700 dark:text-neutral-300">

@@ -19,7 +19,7 @@ export default function IndexRoute() {
 
   console.log(data);
   return (
-    <div className="min-h-screen">
+    <div className="min-h-full">
       <aside>
         <ul>
           {data.postListItems.map(({ slug, title }) => (

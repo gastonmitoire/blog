@@ -22,6 +22,7 @@ import { getUser } from "./utils/session.server";
 import stylesheet from "~/tailwind.css";
 import { Document } from "~/components/document";
 import { Header } from "./components/header";
+import { Sidebar } from "./components/sidebar";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet },
@@ -77,15 +78,7 @@ export default function App() {
           <Outlet />
         </div>
         {/* sidebar */}
-        <div className="flex-0 bg-blue-300">
-          <ul>
-            <li>Item 1</li>
-            <li>Item 2</li>
-            <li>Item 3</li>
-            <li>Item 4</li>
-            <li>Item 5</li>
-          </ul>
-        </div>
+        <Sidebar />
       </main>
     </Document>
   );
