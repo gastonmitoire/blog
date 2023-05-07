@@ -1,6 +1,8 @@
 import type { Post } from "@prisma/client";
 import { Form, Link } from "@remix-run/react";
 
+import { SocialLinks } from "./social_links";
+
 export function PostDisplay({
   canDelete = true,
   isOwner,
@@ -13,7 +15,7 @@ export function PostDisplay({
   return (
     <div className="flex flex-col gap-3 items-center bg-neutral-100 dark:bg-neutral-900">
       <img src={post?.image!} alt="" className="w-full" />
-      <h5 className="text-lg uppercase font-medium pt-5">TypeScript</h5>
+      <h5 className="text-lg uppercase font-medium">TypeScript</h5>
       <h2 className="text-3xl font-medium">{post.title}</h2>
       <div
         className="bg-red-300"
