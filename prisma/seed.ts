@@ -8,6 +8,17 @@ async function seed() {
       // this is a hashed version of "twixrox"
       passwordHash:
         "$2b$10$K7L1OJ45/4Y2nIvhRVpCe.FSmhDdWoXehVzJptJ/op0lSsvqNu/1u",
+      email: "kody@correo.com",
+      profile: {
+        create: {
+          displayName: "Kody",
+          bio: "Hi, I'm Kody!",
+          avatar: "https://example.com/avatar.jpg",
+        },
+      },
+    },
+    include: {
+      profile: true,
     },
   });
   // SEED JOKES
@@ -24,6 +35,24 @@ async function seed() {
       return db.post.create({ data });
     })
   );
+
+  // CREATE OR UPDATE USER SETTINGS
+  await db.$transaction([
+    db.profile.update({
+      where: { id: kody.profile?.id },
+      data: {
+        userSettings: {
+          create: {
+            emailNotifications: true,
+            theme: "light",
+          },
+        },
+      },
+      include: {
+        userSettings: true,
+      },
+    }),
+  ]);
 }
 
 seed();

@@ -49,6 +49,8 @@ export default function App() {
   const data = useLoaderData() as unknown as Data;
   const [darkMode, setDarkMode] = useState(true);
 
+  console.log(data.user, "USER");
+
   const toggleDarkMode = () => {
     const newValue = !darkMode;
     setDarkMode(newValue);

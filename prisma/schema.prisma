@@ -11,13 +11,41 @@ datasource db {
 }
 
 model User {
-  id           String   @id @default(uuid())
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  username     String   @unique
+  id           String    @id @default(uuid())
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  username     String    @unique
+  email        String?   @unique
   passwordHash String
+  role         String    @default("user")
+  profile      Profile?
   jokes        Joke[]
-  Post         Post[]
+  post         Post[]
+  comment      Comment[]
+}
+
+model Profile {
+  id          String   @id @default(uuid())
+  userId      String   @unique
+  displayName String?
+  bio         String?
+  avatar      String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relationship to User model
+  user         User          @relation(fields: [userId], references: [id])
+  userSettings UserSettings?
+}
+
+model UserSettings {
+  id                 String   @id @default(uuid())
+  profile            Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId          String   @unique
+  emailNotifications Boolean  @default(true)
+  theme              String   @default("dark")
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
 }
 
 model Joke {
@@ -31,11 +59,48 @@ model Joke {
 }
 
 model Post {
-  slug      String   @id
-  authorId  String
-  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title     String
-  markdown  String
+  id             String     @id @default(uuid())
+  authorId       String
+  author         User       @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+  title          String
+  slug           String     @unique
+  markdown       String
+  image          String?
+  secondaryImage String?
+  category       Category[] @relation("CategoryToPost")
+  tag            Tag[]      @relation("TagToPost")
+  section        Section[]  @relation("SectionToPost")
+  comments       Comment[]
+}
+
+model Category {
+  id    String @id @default(uuid())
+  name  String @unique
+  posts Post[] @relation("CategoryToPost")
+}
+
+model Tag {
+  id    String @id @default(uuid())
+  name  String @unique
+  posts Post[] @relation("TagToPost")
+}
+
+model Section {
+  id    String @id @default(uuid())
+  name  String @unique
+  posts Post[] @relation("SectionToPost")
+}
+
+model Comment {
+  id         String   @id @default(uuid())
+  postId     String
+  post       Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  authorId   String
+  author     User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  content    String
+  isApproved Boolean  @default(false)
 }
