@@ -22,6 +22,7 @@ export function Popover({ button, children }: PopoverProps) {
       {isOpen && (
         <div
           onMouseLeave={() => setIsOpen(false)}
+          onBlur={() => setIsOpen(false)}
           className="absolute right-0 w-56 origin-top-right bg-neutral-100 dark:bg-neutral-700 divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5"
         >
           {children}
