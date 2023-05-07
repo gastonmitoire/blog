@@ -81,15 +81,17 @@ model Post {
 }
 
 model Category {
-  id    String @id @default(uuid())
-  name  String @unique
-  posts Post[] @relation("CategoryToPost")
+  id          String  @id @default(uuid())
+  name        String  @unique
+  description String?
+  posts       Post[]  @relation("CategoryToPost")
 }
 
 model Tag {
-  id    String @id @default(uuid())
-  name  String @unique
-  posts Post[] @relation("TagToPost")
+  id          String  @id @default(uuid())
+  name        String  @unique
+  description String?
+  posts       Post[]  @relation("TagToPost")
 }
 
 model Section {
