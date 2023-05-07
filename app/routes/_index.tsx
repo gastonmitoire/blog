@@ -12,6 +12,7 @@ export const loader = async ({ request }: LoaderArgs) => {
       title: true,
       author: { select: { username: true } },
       image: true,
+      markdown: true,
       secondaryImage: true,
     },
     take: 5,
@@ -23,10 +24,12 @@ export const loader = async ({ request }: LoaderArgs) => {
 export default function IndexRoute() {
   const data = useLoaderData<typeof loader>();
 
+  console.log(data);
+
   return (
-    <div className="min-h-full">
+    <div className="flex flex-col space-y-5 min-h-full">
       {data.postListItems.map((post, index) => (
-        <PostPreview {...post} />
+        <PostPreview key={index} {...post} />
       ))}
     </div>
   );

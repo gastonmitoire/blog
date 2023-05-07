@@ -32,11 +32,11 @@ export function Document({
         <Links />
       </head>
       <body
-        className="bg-neutral-100 dark:bg-neutral-900"
+        className="bg-neutral-100 dark:bg-neutral-900 bg-cover bg-center"
         style={{
-          backgroundSize: "cover",
-          backgroundPosition: "center center",
-          background: `url('https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.hdwallpaperspulse.com%2Fwp-content%2Fuploads%2F2017%2F12%2F23%2Fbeautiful-hd-widescreen-image.jpg&f=1&nofb=1&ipt=14f14486b2b0b252e46f27611f709f8016a9eb0ba7f651d550e77eb570b01e60&ipo=images')`,
+          backgroundImage: `url('https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.hdwallpaperspulse.com%2Fwp-content%2Fuploads%2F2017%2F12%2F23%2Fbeautiful-hd-widescreen-image.jpg&f=1&nofb=1&ipt=14f14486b2b0b252e46f27611f709f8016a9eb0ba7f651d550e77eb570b01e60&ipo=images')`,
+          backgroundAttachment: "fixed",
+          backgroundRepeat: "no-repeat",
         }}
       >
         {children}

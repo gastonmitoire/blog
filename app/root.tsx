@@ -69,7 +69,7 @@ export default function App() {
   return (
     <Document>
       <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} user={user} />
-      <div className="container mx-auto flex">
+      <div className="container mx-auto flex space-x-3">
         {/* main content */}
         <main className="flex-1">
           <Outlet />

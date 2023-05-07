@@ -37,12 +37,12 @@ async function seed() {
     })
   );
   // SEED CATEGORIES
-  await Promise.all(
-    getCategories().map((category) => {
-      const data = { ...category };
-      return db.category.create({ data });
-    })
-  );
+  // await Promise.all(
+  //   getCategories().map((category) => {
+  //     const data = { ...category };
+  //     return db.category.create({ data });
+  //   })
+  // );
 
   // CREATE OR UPDATE USER SETTINGS
   await db.$transaction([
