@@ -69,14 +69,14 @@ export default function App() {
   return (
     <Document>
       <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} user={user} />
-      <main className="container mx-auto flex">
+      <div className="container mx-auto flex">
         {/* main content */}
-        <div className="flex-1">
+        <main className="flex-1">
           <Outlet />
-        </div>
+        </main>
         {/* sidebar */}
         {pathname !== "/login" ? <Sidebar /> : null}
-      </main>
+      </div>
     </Document>
   );
 }
