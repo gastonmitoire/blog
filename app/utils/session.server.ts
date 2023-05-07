@@ -91,6 +91,11 @@ export async function getUser(request: Request) {
             avatar: true,
             bio: true,
             displayName: true,
+            firstName: true,
+            lastName: true,
+            birthday: true,
+            address: true,
+            phone: true,
             userSettings: {
               select: {
                 theme: true,

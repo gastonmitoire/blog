@@ -25,13 +25,18 @@ model User {
 }
 
 model Profile {
-  id          String   @id @default(uuid())
-  userId      String   @unique
+  id          String    @id @default(uuid())
+  userId      String    @unique
   displayName String?
   bio         String?
   avatar      String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  firstName   String?
+  lastName    String?
+  birthday    DateTime?
+  address     String?
+  phone       String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 
   // Relationship to User model
   user         User          @relation(fields: [userId], references: [id])
