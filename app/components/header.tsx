@@ -1,6 +1,7 @@
-import { UserMenu } from "./user_menu";
+import { Link } from "@remix-run/react";
 
 import { Breadcrumbs } from "./breadcrumbs";
+import { UserMenu } from "./user_menu";
 
 // Header.tsx
 type HeaderProps = {
@@ -14,9 +15,12 @@ export function Header({ darkMode, toggleDarkMode, user }: HeaderProps) {
     <header className="py-3">
       <nav className="container flex items-center justify-between mx-auto p-3 bg-neutral-200 dark:bg-neutral-800">
         <div className="flex items-end space-x-3">
-          <h1 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100">
+          <Link
+            to="/"
+            className="text-2xl font-bold cursor-pointer text-neutral-900 dark:text-neutral-100"
+          >
             MyBlog
-          </h1>
+          </Link>
           <Breadcrumbs />
         </div>
         <div className="flex items-center space-x-4">
