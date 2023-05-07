@@ -8,11 +8,11 @@ export function PostDisplay({
 }: {
   canDelete?: boolean;
   isOwner: boolean;
-  post: Pick<Post, "slug" | "title">;
+  post: Pick<Post, "slug" | "title" | "image" | "secondaryImage">;
 }) {
   return (
     <div>
-      <p>Here's your post:</p>
+      <img src={post?.image!} alt="" className="w-full" />
       <p>{post.title}</p>
       <Link to=".">"{post.slug}" Permalink</Link>
       {isOwner ? (

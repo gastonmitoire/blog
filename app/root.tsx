@@ -16,8 +16,9 @@ import {
   useRouteError,
 } from "@remix-run/react";
 import type { PropsWithChildren } from "react";
+import { User, Post } from ".prisma/client";
 
-import { User } from ".prisma/client";
+import { db } from "./utils/db.server";
 import { getUser } from "./utils/session.server";
 import stylesheet from "~/tailwind.css";
 import { Document } from "~/components/document";
@@ -46,12 +47,16 @@ export const loader = async ({ request }: LoaderArgs) => {
 
 type AppProps = PropsWithChildren<{
   user: User | null;
+  post: Post | null;
 }>;
 
 export default function App() {
+  const location = useLocation();
   const { pathname } = useLocation();
-  const { user } = useLoaderData() as AppProps;
+  const { user, post } = useLoaderData() as AppProps;
   const [darkMode, setDarkMode] = useState(true);
+
+  console.log("location", location);
 
   const toggleDarkMode = () => {
     const newValue = !darkMode;
